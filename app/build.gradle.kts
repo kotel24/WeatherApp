@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.parcelize)
 }
 
 android {
@@ -49,6 +51,35 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+
+    //для работы с mvi
+    implementation(libs.mvikotlin)
+    implementation(libs.mvikotlin.main)
+    implementation(libs.mvikotlin.logging)
+    implementation(libs.mvikotlin.extensions.coroutines)
+
+    //для работы с decompose
+    implementation(libs.decompose)
+    implementation(libs.decompose.jetpac)
+
+    //для работы с room
+    implementation(libs.room.core)
+    ksp(libs.room.compiler)
+
+    //для работы с Dagger
+    implementation(libs.dagger.core)
+    ksp(libs.dagger.compiler)
+
+    //для работы с Glide
+    implementation(libs.glide.compose)
+
+    //для retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+    //иконки
+    implementation(libs.icons)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
