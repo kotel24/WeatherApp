@@ -1,4 +1,4 @@
-package ru.sumin.weatherapp.ui.theme
+package ru.sumin.weatherapp.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
