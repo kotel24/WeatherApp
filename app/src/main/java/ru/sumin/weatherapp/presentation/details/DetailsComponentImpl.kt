@@ -9,8 +9,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.sumin.weatherapp.domain.entity.City
 import ru.sumin.weatherapp.presentation.extesions.componentScope
+import javax.inject.Inject
 
-class DetailsComponentImpl(
+class DetailsComponentImpl @Inject constructor(
     private val city: City,
     private val storeFactory: DetailsStoreFactory,
     private val onBackClicked: () -> Unit,

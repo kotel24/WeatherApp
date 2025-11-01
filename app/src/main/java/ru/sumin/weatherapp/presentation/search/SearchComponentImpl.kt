@@ -9,8 +9,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.sumin.weatherapp.domain.entity.City
 import ru.sumin.weatherapp.presentation.extesions.componentScope
+import javax.inject.Inject
 
-class SearchComponentImpl(
+class SearchComponentImpl @Inject constructor(
     private val openReason: OpenReason,
     private val storeFactory: SearchStoreFactory,
     private val onCityClicked: (City) -> Unit,
