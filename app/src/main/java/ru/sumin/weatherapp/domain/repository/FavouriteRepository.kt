@@ -5,9 +5,9 @@ import ru.sumin.weatherapp.domain.entity.City
 
 interface FavouriteRepository {
 
-    val favouriteCities: Flow<City>
+    val favouriteCities: Flow<List<City>>
 
-    fun observeIsFavourite(cityId: Int): Boolean
+    fun observeIsFavourite(cityId: Int): Flow<Boolean>
 
     suspend fun addToFavourite(city: City)
 
