@@ -3,6 +3,7 @@ package ru.sumin.weatherapp.di
 import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
+import ru.sumin.weatherapp.presentation.MainActivity
 
 @ApplicationScope
 @Component(
@@ -12,6 +13,9 @@ import dagger.Component
     ]
 )
 interface ApplicationComponent {
+
+    fun inject(activity: MainActivity)
+
     @Component.Factory
     interface Factory{
         fun create(@BindsInstance context: Context): ApplicationComponent
