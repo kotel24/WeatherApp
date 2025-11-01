@@ -4,20 +4,22 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.sumin.weatherapp.domain.entity.City
 import ru.sumin.weatherapp.presentation.extesions.componentScope
-import javax.inject.Inject
 
-class SearchComponentImpl @Inject constructor(
-    private val openReason: OpenReason,
+class SearchComponentImpl @AssistedInject constructor(
     private val storeFactory: SearchStoreFactory,
-    private val onCityClicked: (City) -> Unit,
-    private val onBackClicked: () -> Unit,
-    private val onSavedToFavourite: () -> Unit,
-    componentContext: ComponentContext
+    @Assisted("openReason") private val openReason: OpenReason,
+    @Assisted("onCityClicked") private val onCityClicked: (City) -> Unit,
+    @Assisted("onBackClicked") private val onBackClicked: () -> Unit,
+    @Assisted("onSavedToFavourite") private val onSavedToFavourite: () -> Unit,
+    @Assisted("componentContext") componentContext: ComponentContext
 ) : SearchComponent, ComponentContext by componentContext{
 
     private val store = instanceKeeper.getStore {  storeFactory.create(openReason) }
@@ -53,6 +55,17 @@ class SearchComponentImpl @Inject constructor(
 
     override fun onClickCity(city: City) {
         store.accept(SearchStore.Intent.ClickCity(city))
+    }
+
+    @AssistedFactory
+    interface Factory{
+        fun create(
+            @Assisted("openReason") openReason: OpenReason,
+            @Assisted("onCityClicked") onCityClicked: (City) -> Unit,
+            @Assisted("onBackClicked") onBackClicked: () -> Unit,
+            @Assisted("onSavedToFavourite") onSavedToFavourite: () -> Unit,
+            @Assisted("componentContext") componentContext: ComponentContext
+        ):SearchComponentImpl
     }
 
 }
