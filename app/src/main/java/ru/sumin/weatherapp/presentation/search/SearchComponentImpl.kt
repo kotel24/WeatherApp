@@ -16,7 +16,7 @@ import ru.sumin.weatherapp.presentation.extesions.componentScope
 class SearchComponentImpl @AssistedInject constructor(
     private val storeFactory: SearchStoreFactory,
     @Assisted("openReason") private val openReason: OpenReason,
-    @Assisted("onCityClicked") private val onCityClicked: (City) -> Unit,
+    @Assisted("onForecastForCityRequested") private val onForecastForCityRequested: (City) -> Unit,
     @Assisted("onBackClicked") private val onBackClicked: () -> Unit,
     @Assisted("onSavedToFavourite") private val onSavedToFavourite: () -> Unit,
     @Assisted("componentContext") componentContext: ComponentContext
@@ -30,7 +30,7 @@ class SearchComponentImpl @AssistedInject constructor(
             store.labels.collect {
                 when(it){
                     SearchStore.Label.ClickBack -> onBackClicked()
-                    is SearchStore.Label.OpenForecast -> onCityClicked(it.city)
+                    is SearchStore.Label.OpenForecast -> onForecastForCityRequested(it.city)
                     SearchStore.Label.SaveToFavourite -> onSavedToFavourite()
                 }
             }
@@ -61,7 +61,7 @@ class SearchComponentImpl @AssistedInject constructor(
     interface Factory{
         fun create(
             @Assisted("openReason") openReason: OpenReason,
-            @Assisted("onCityClicked") onCityClicked: (City) -> Unit,
+            @Assisted("onForecastForCityRequested") onForecastForCityRequested: (City) -> Unit,
             @Assisted("onBackClicked") onBackClicked: () -> Unit,
             @Assisted("onSavedToFavourite") onSavedToFavourite: () -> Unit,
             @Assisted("componentContext") componentContext: ComponentContext

@@ -67,7 +67,7 @@ class RootComponentImpl @AssistedInject constructor(
             is Config.Search -> {
                 val component = searchComponentFactory.create(
                     openReason = config.openReason,
-                    onCityClicked = {
+                    onForecastForCityRequested = {
                         navigation.push(Config.Details(it))
                     },
                     onBackClicked = {

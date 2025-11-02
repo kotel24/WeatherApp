@@ -110,8 +110,8 @@ class SearchStoreFactory @Inject constructor(
                         OpenReason.AddToFavourite -> {
                             scope.launch {
                                 changeFavouriteStateUseCase.addToFavourite(intent.city)
+                                publish(Label.SaveToFavourite)
                             }
-                            publish(Label.SaveToFavourite)
                         }
 
                         OpenReason.RegularSearch -> publish(Label.OpenForecast(intent.city))
